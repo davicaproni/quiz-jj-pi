@@ -1,0 +1,21 @@
+body{
+    background-image: url(https://st2.depositphotos.com/2339653/6123/i/450/depositphotos_61237311-stock-photo-white-marble-texture-background-high.jpg);
+    background-size: cover;
+}
+
+.titulo{
+    text-align: center;
+    height: 70%;
+    width: 70%;
+    font-size: 300%;
+    justify-content: center;
+    align-items: center;
+}
+.frase{
+    text-align: center;
+    height: 70%;
+    width: 70%;
+    font-size: 200%;
+    justify-content: center;
+    align-items: center;
+}
