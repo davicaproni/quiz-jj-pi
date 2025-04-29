@@ -1,23 +1,5 @@
 {
-  "name": "quiz-jj-pi",
-  "version": "1.0.0",
-  "description": "Projeto Pessoal de P.I - 1° semestre",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/davicaproni/quiz-jj-pi.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/davicaproni/quiz-jj-pi/issues"
-  },
-  "homepage": "https://github.com/davicaproni/quiz-jj-pi#readme",
   "dependencies": {
-    "mysql": "^2.18.1"
+    "mysql2": "^3.14.1"
   }
 }
