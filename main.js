@@ -11,4 +11,4 @@ const connection = mysql.createConnection({
 connection.connect(function(erro) {
     if (erro) throw erro;
     console.log('Conexão realizada com sucesso');
-});
+}); 
