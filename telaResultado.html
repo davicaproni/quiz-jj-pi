@@ -1,21 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado</title>
-    <script>
-        window.onload = function() {
-            const pontos = localStorage.getItem('pontuacaoQuiz');
-            if (pontos !== null) {
-                document.getElementById('txt').innerHTML = `Você acertou ${pontos} de 10 perguntas!`;
-            }
-        };
-    </script>
-
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="resultado.css">
+  <title>Resultado</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
-    <h1>Seu Resultado</h1>
-    <div id="txt"></div>
+<div class="flexbox">
+  <h1>Seu Resultado</h1>
+  <div id="txt"></div>
+  <canvas class="grafico" id="pontos"></canvas>
+</div>
 </body>
 </html>
+
+<script>
+    window.onload = function () {
+      const pontos = localStorage.getItem('pontuacaoQuiz');
+      const graficoA = JSON.parse(localStorage.getItem('graficoQuiz'));
+
+        txt.innerHTML = `Você acertou ${pontos} de 10 perguntas!`;
+    
+      var graficoB = new Chart(document.getElementById('pontos').getContext('2d'), {
+        type: 'line',
+        data: { 
+            labels: graficoA.map((_, i) => `Pergunta ${i + 1}`),       
+            datasets: [{
+            label: 'pontosGrafico',
+            data: graficoA,
+            borderColor: 'white',
+            backgroundColor: 'black'
+          }]
+        },
+        options: {
+        scales: {
+          x: {
+            title: {
+              display: true, 
+              text: 'Perguntas'
+            }
+          },
+          y: {
+            
+            title: {
+              display: true,
+              text: 'Pontos'
+            },
+            beginAtZero: true,
+            max: 10
+          }
+        }
+      }
+    });
+  }
+  </script>

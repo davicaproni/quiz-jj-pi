@@ -2,13 +2,18 @@ function calcular() {
     
     var pontos = 0
 
+    var pontosGrafico = []
+
     // Resposta 1
     const resposta1 = document.querySelector('input[name="1"]:checked');    
     if (resposta1 && resposta1.value === "16") {
         console.log('Acertou');
         pontos++;
+        pontosGrafico.push(pontos);
+
     } else {
         console.log('Errou');
+        pontosGrafico.push(pontos);
     }
 
     // Resposta 2
@@ -16,8 +21,10 @@ function calcular() {
     if (resposta2 && resposta2.value === "roxa") {
         console.log('Acertou');
         pontos++;
+        pontosGrafico.push(pontos);
     } else {
         console.log('Errou');
+        pontosGrafico.push(pontos);
     }
 
     // Resposta 3
@@ -25,8 +32,10 @@ function calcular() {
     if (resposta3 && resposta3.value === "braco") {
         console.log('Acertou');
         pontos++;
+        pontosGrafico.push(pontos);
     } else {
         console.log('Errou');
+        pontosGrafico.push(pontos);
     }
 
     // Resposta 4
@@ -34,8 +43,10 @@ function calcular() {
     if (resposta4 && resposta4.value === "sair") {
         console.log('Acertou');
         pontos++;
+        pontosGrafico.push(pontos);
     } else {
         console.log('Errou');
+        pontosGrafico.push(pontos);
     }
 
     // Resposta 5
@@ -43,8 +54,10 @@ function calcular() {
     if (resposta5 && resposta5.value === "joelho") {
         console.log('Acertou');
         pontos++;
+        pontosGrafico.push(pontos);
     } else {
         console.log('Errou');
+        pontosGrafico.push(pontos);
     }
 
     // Resposta 6
@@ -52,8 +65,10 @@ function calcular() {
     if (resposta6 && resposta6.value === "costas") {
         console.log('Acertou');
         pontos++;
+        pontosGrafico.push(pontos);
     } else {
         console.log('Errou');
+        pontosGrafico.push(pontos);
     }
 
     // Resposta 7
@@ -61,8 +76,10 @@ function calcular() {
     if (resposta7 && resposta7.value === "finalizacao_braco") {
         console.log('Acertou');
         pontos++;
+        pontosGrafico.push(pontos);
     } else {
         console.log('Errou');
+        pontosGrafico.push(pontos);
     }
 
     // Resposta 8
@@ -70,8 +87,10 @@ function calcular() {
     if (resposta8 && resposta8.value === "jiu_jitsu") {
         console.log('Acertou');
         pontos++;
+        pontosGrafico.push(pontos);
     } else {
         console.log('Errou');
+        pontosGrafico.push(pontos);
     }
 
     // Resposta 9
@@ -79,8 +98,10 @@ function calcular() {
     if (resposta9 && resposta9.value === "luta_agarramento") {
         console.log('Acertou');
         pontos++;
+        pontosGrafico.push(pontos);
     } else {
         console.log('Errou');
+        pontosGrafico.push(pontos);
     }
 
     // Resposta 10
@@ -88,13 +109,15 @@ function calcular() {
     if (resposta10 && resposta10.value === "azul") {
         console.log('Acertou');
         pontos++;
+        pontosGrafico.push(pontos);
     } else {
         console.log('Errou');
+        pontosGrafico.push(pontos);
     }
-    window.location.href = "telaResultado.html?pontos" + pontos;
-    txt.innerHTML = `${pontos}`;
-    window.location.href = "C:/Users/User/Desktop/GitHub/quiz-jj-pi/telaResultado.html";
+    localStorage.setItem("pontuacaoQuiz", pontos);
+    localStorage.setItem('graficoQuiz', JSON.stringify(pontosGrafico));
 
+    window.location.href = "telaResultado.html"; // Caminho relativo correto
   
     
 }
