@@ -117,7 +117,7 @@ function calcular() {
     localStorage.setItem("pontuacaoQuiz", pontos);
     localStorage.setItem('graficoQuiz', JSON.stringify(pontosGrafico));
 
-    window.location.href = "telaResultado.html"; // Caminho relativo correto
+    window.location.href = "../html/telaResultado.html"; // Caminho relativo correto
   
     
 }

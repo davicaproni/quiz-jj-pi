@@ -2,8 +2,7 @@
 
 
 body{
-    background-image: url(https://st2.depositphotos.com/2339653/6123/i/450/depositphotos_61237311-stock-photo-white-marble-texture-background-high.jpg);
-    background-size: cover;
+    background-color: rgb(248, 244, 238);
 }
 
 .titulo{
@@ -92,17 +91,20 @@ body{
     border-radius: 30px;
 }
 
-.img{
+.img5{
+    padding: 0%;
     margin-top: 10px;
-    height: 75%;
-    width: 72%;
+    height: 30%;
+    width: 30%;
     margin-right: 5px;
-    border-radius: 30px;
 }
 
 .line2{
     border-bottom: solid 2px;
     width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
 }
 
 .flexbox2 {
@@ -176,3 +178,33 @@ body{
     outline: 2px solid rgb(147, 167, 184);
     outline-offset: 2px;
 }
+
+.flexbox3 {
+    display: flex;
+    align-items: center;
+    background-color: rgb(195, 205, 213);
+    padding: 30px;
+    border-radius: 8px;
+    width: 50%;
+    margin: 2px auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    gap: 40px;
+  }
+  
+  .imgDavi {
+    width: 220px;
+    height: 240px;
+    border-radius: 30%;
+    object-fit: cover;
+  }
+  
+  .texto2 {
+    flex: 1;
+    color: #050505;
+    font-size: 1rem;
+    font-family: "Inter", sans-serif;
+    text-align: justify;
+
+  }
+  
+  
