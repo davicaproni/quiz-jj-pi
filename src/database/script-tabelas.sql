@@ -6,6 +6,7 @@ use quiz;
 create table cadastro (
 idCadastro int primary key auto_increment,
 nome varchar(75),
+email varchar(75),
 senha varchar(45)
 );
 
