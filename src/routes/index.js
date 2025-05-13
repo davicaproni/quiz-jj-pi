@@ -1,8 +1,9 @@
-var express = require("express");
-var router = express.Router();
+const express = require('express');
+const path = require('path');
+const router = express.Router(); // <- ISSO É O IMPORTANTE
 
-router.get("/", function (req, res) {
-    res.render("index");
+router.get('/cadastro', (req, res) => {
+res.render('cadastro'); // Renderiza a página cadastro.ejs
 });
 
 module.exports = router;
