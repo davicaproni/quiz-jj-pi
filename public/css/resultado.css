@@ -1,0 +1,25 @@
+body{
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    background-color: rgb(249, 241, 231);
+}
+
+.flexbox{
+    padding: 10%;
+    background-color: rgb(147, 167, 184);
+    border-radius: 5%;
+    margin: 2% 1% 25% 1%;
+    font-family: "Inter", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10%;
+
+}
+
+.grafico{
+    max-width: 100%;
+    height: 500px;
+
+}

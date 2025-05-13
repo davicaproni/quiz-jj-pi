@@ -1,0 +1,214 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --primary-brand-color: #ED145B;
+    --secondary-brand-color: #0762C8;
+    --success: #198754;
+    --success-dark: #095c36;
+    --success-light: #9dd3ba;
+    --warning: #ffc107;
+    --warning-dark: #705400;
+    --warning-light: #fdebb3;
+    --danger: #dc3545;
+    --danger-dark: #990c19;
+    --danger-light: #f0c1c6;
+    --new-gray: #CCCCCC;
+    --new-black: #212427;
+    --new-white: #E8E8E8;
+}
+
+body {
+    color: var(--new-black);
+    background-color: var(--new-white);
+    font-family: "Inter", sans-serif;
+    justify-items: center;
+}
+
+.btnIniciar{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 500;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 30px;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+}
+
+.btnIniciar:hover {
+    background-color: #ff0000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btnIniciar:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.btnIniciar:focus {
+    outline: 2px solid rgb(147, 167, 184);
+    outline-offset: 2px;
+}
+
+button {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 500;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    width: 70%;
+    height: 70%;
+    text-decoration: none;
+}
+.button:hover {
+    background-color: #ff0000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.button:focus {
+    outline: 2px solid rgb(147, 167, 184);
+    outline-offset: 2px;
+}
+
+
+.flex-colunar {
+    display: flex;
+    flex-direction: column;
+}
+.padding-8 {
+    padding: 20px;
+    background: rgb(152, 170, 185);
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex; /* corrigido para flex, para usar flex-direction */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    min-width: 800px;
+    min-height: 200px; /* força altura mínima */
+    box-sizing: border-box; /* garante que padding não estique o container */
+    margin: 0 auto;
+}
+
+.padding-9 {
+    padding: 15px;
+    background-color: rgb(195, 205, 213);    
+    border: 1px solid #d1d5db; /* borda leve */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    max-width: 600px;
+    min-width: 600px;
+    min-height: 10px;
+    margin: 10px auto;
+    text-align: justify;
+
+}
+
+.padding-10{
+    padding: 15px;
+    background-color: #c1ceda; /* tom leve de azul */
+    border: 1px solid #d1d5db; /* borda leve */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    max-width: 200px;
+     min-width: 600px;
+    margin: 2px auto;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-success-with-bg {
+    color: var(--success-dark);
+    background-color: var(--success-light);
+}
+
+.text-warning-with-bg {
+    color: var(--warning-dark);
+    background-color: var(--warning-light);
+}
+
+.text-danger-with-bg {
+    color: var(--danger-dark);
+    background-color: var(--danger-light);
+}
+
+.text-new-gray {
+    color: var(--new-gray);
+}
+
+.line2{
+    border-bottom: solid 1px;
+    width: 50%;
+    margin: 10px auto 15px;
+}
+.voltar {
+    display: inline-block;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #3e3e3e;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.voltar:hover {
+    background-color: #333333;
+     color: #e50707;
+}
+
+.caixaPontos{
+    padding: 5%;
+    background-color: rgb(195, 205, 213);   
+    width: 270px;
+    height: 20%; 
+    border-radius: 10px;
+    font-size:medium;
+    align-items: center;
+
+
+}
+.flexbox3 {
+    display: flex;
+    flex-direction: row;
+    gap: 10%;
+}

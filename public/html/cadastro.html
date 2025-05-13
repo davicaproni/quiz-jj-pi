@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/css/cadastro.css">
+</head>
+<body>
+<div class="box">
+    <div class="titulo"><h1>Cadastre-se já!</h1></div>
+    <div class="line1"></div>
+    <h3>Insira todos os campos corretamente</h3>
+    Nome Completo: <input id="nome" placeholder="João da Silva Cordeiro">
+    <br><br>
+    E-mail: <input id="email" placeholder="joao@gmail.com">
+    <br><br>
+    Insira uma senha: <input type="password" id="senha">
+    <br><br>
+    Confirme a senha: <input type="password" id="confirmar">
+    <br><br>
+    <button class="button" onclick="cadastrar()">CADASTRAR</button> <br><br>
+    <a href="C:/Users/User/Desktop/GitHub/quiz-jj-pi/public/html/login.html" class="button1">Ir para Login</a>
+</div>
+</body>
+</html>
+
+<script>
+    function cadastrar() {
+    // aguardar();
+if (nome.value == '' || email.value =='' || senha.value == '' || confirmar == '') {
+  alert('Preencha os campos corretamente!!!')
+} else if(senha.value != confirmar.value){
+  alert('A confirmação da senha NÃO corresponde a senha informada')
+} else {
+  
+
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = nome.value;
+    var emailVar = email.value;
+    var senhaVar = senha.value;
+    var confirmacaoSenhaVar = confirmar.value;
+
+    // Verificando se há algum campo em branco
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+        
+
+      setTimeout(() => {
+        alert('Cadastro Realizado com Sucesso!!')
+  window.location = "/html/login.html";
+  
+}, 2000);
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+  }
+}
+</script>
