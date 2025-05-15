@@ -5,9 +5,9 @@ use quiz;
 
 create table cadastro (
 idCadastro int primary key auto_increment,
-nome varchar(75),
-email varchar(75),
-senha varchar(45)
+nome varchar(75) not null,
+email varchar(75) unique not null,
+senha varchar(45) not null
 );
 
 create table pontuacao (
@@ -30,3 +30,5 @@ constraint fkCadastroFeedback
 	foreign key (fkCadastroF)
 		references cadastro(idCadastro)
 );
+
+
