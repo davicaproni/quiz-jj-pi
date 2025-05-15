@@ -10,8 +10,10 @@
 <body > 
 
     <nav>
+        <h3 class="nav-bar">Olá, <span id="b_usuario">usuário</span>!</h3>        
         <a class="nav-bar" href="#info">Informações</a>
         <a class="nav-bar" href="#quiz">Quiz</a>
+        <a class="nav-bar" href="#feedback">Feedback</a>
         <a class="nav-bar" href="#autor">Autor</a>
     </nav>
     
@@ -63,7 +65,7 @@
             <p>Nos anos 90, o jiu-jitsu estourou no mundo com o nascimento do UFC (Ultimate Fighting Championship). <br>Um dos fundadores foi o Rorion Gracie, que colocou seu irmão, Royce Gracie, pra lutar e mostrar como o BJJ era eficiente mesmo contra adversários maiores e mais fortes. <br>
             Depois disso, o jiu-jitsu virou febre nos EUA, Europa, Ásia... e continua crescendo até hoje, tanto como esporte quanto como defesa pessoal.</p>
         </div>
-        <img class="img4" src="C:/Users/User/Documents/SPTECH/Pi/imgmundo.png" alt="">
+        <img class="img4" src="../img/imgmundo.png" alt="Mundo">
     </div>
     <br>  
  
@@ -111,12 +113,26 @@
             <h3>Divirta-se e teste agora os seus conhecimentos sobre a arte-suave <br> em um formulario interativo e super divertido!</h3>
             <div class="line1"></div>
     <button onclick="ir()" class="button">Ir para quiz</button>
+    </div>
+    
+    <br>
+    <br>
+    <br>
+
+        <div id="feedback" class="flexbox2">
+            <h1>Página de Feedback</h1>
+            <h3>Deixe a sua opnião sobre tudo do site e conte como foi sua experiência! </h3>
+            <div class="line1"></div>
+    <button onclick="irFeedback()" class="button">Ir para Feedback</button>
+       </div>
+
+
 </div>
 <br>
 <br>
 <br>
 <div id="autor" class="flexbox3">
-    <img class="imgDavi" src="C:/Users/User/Pictures/imgdavijj.jpg" alt="">
+    <img class="imgDavi" src="../img/imgdavijj.jpg" alt="">
     <div class="texto2"><h2>Autor</h2>
     <h4>Davi Escudero Caproni</h4>
     <p>Faixa Roxa de Jiu-Jitsu <br><br>
@@ -135,8 +151,9 @@
 </body>
 </html>
 <script>
+    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
 function ir() {
-            window.location.href = "C:/Users/User/Desktop/GitHub/quiz-jj-pi/html/quiz.html";
+            window.location.href = "../html/quiz.html";
 
 }
 </script>
