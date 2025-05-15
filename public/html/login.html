@@ -37,6 +37,22 @@
 </html>
 <script>
 function entrar() {
+
+    function aguardar() {
+    var divAguardar = document.getElementById("div_aguardar");
+    divAguardar.style.display = "flex";
+}
+
+function finalizarAguardar(texto) {
+    var divAguardar = document.getElementById("div_aguardar");
+    divAguardar.style.display = "none";
+
+    var divErrosLogin = document.getElementById("div_erros_login");
+    if (texto) {
+        divErrosLogin.style.display = "flex";
+        divErrosLogin.innerHTML = texto;
+    }
+}
         aguardar();
 
         var emailVar = email.value;
@@ -79,7 +95,7 @@ function entrar() {
                     
 
                     setTimeout(function () {
-                        window.location.href = "../index.html";
+                        window.location.href = "../html/index.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
@@ -118,22 +134,6 @@ function entrar() {
     }
 }
 
-// carregamento (loading)
-function aguardar() {
-    var divAguardar = document.getElementById("div_aguardar");
-    divAguardar.style.display = "flex";
-}
-
-function finalizarAguardar(texto) {
-    var divAguardar = document.getElementById("div_aguardar");
-    divAguardar.style.display = "none";
-
-    var divErrosLogin = document.getElementById("div_erros_login");
-    if (texto) {
-        divErrosLogin.style.display = "flex";
-        divErrosLogin.innerHTML = texto;
-    }
-}
     
 
     function cadastrar() {
