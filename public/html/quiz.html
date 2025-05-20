@@ -93,6 +93,9 @@
 
 </html>
 <script>
+    
+
+    console.log(sessionStorage.ID_USUARIO)
     const listaDeQuestoes = [
 
         {
@@ -405,9 +408,27 @@ new Chart(document.getElementById('graficoB').getContext('2d'), {
     }
 });
 
-
-
-
-
+fetch("/quiz/registrarQuiz", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        fkCadastroPServer: sessionStorage.getItem('ID_USUARIO'),
+        pontosServer: pontuacaoFinal
+    })
+})
+.then(res => {
+    if (res.ok) {
+        console.log("Pontuação registrada com sucesso!");
+    } else {
+        console.error("Erro ao registrar pontuação.");
     }
+})
+.catch(err => {
+    console.error("Erro de conexão ao registrar pontuação:", err);
+});
+    }
+    
+
 </script>

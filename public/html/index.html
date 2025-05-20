@@ -5,12 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Jiu Jitsu</title>
     <link rel="stylesheet" href="../css/site.css">
-    <script src="../js/quiz.js" defer></script>
 </head>
 <body > 
 
     <nav>
-        <h3 class="nav-bar">Olá, <span id="b_usuario">usuário</span>!</h3>        
+        <h3 class="nav-bar">Olá, <span id="b_usuario"></span>!</h3>        
         <a class="nav-bar" href="#info">Informações</a>
         <a class="nav-bar" href="#quiz">Quiz</a>
         <a class="nav-bar" href="#feedback">Feedback</a>
@@ -151,9 +150,27 @@
 </body>
 </html>
 <script>
-    b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+const idCadastro = sessionStorage.ID_USUARIO;
 function ir() {
             window.location.href = "../html/quiz.html";
+            resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idCadastro;
+                    
+
+                    setTimeout(function () {
+                        window.location.href = "../html/index.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+}
+function irFeedback() {
+            window.location.href = "../html/feedback.html";
 
 }
 </script>

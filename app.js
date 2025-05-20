@@ -21,36 +21,29 @@ app.use(express.urlencoded({ extended: false }));
 // Servir arquivos estáticos (CSS, JS, imagens)
 app.use(express.static(path.join(__dirname, "public")));
 
-// Rotas de páginas HTML
 
-app.get('/cadastro', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/html/cadastro.html'));
-});
-
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/html/login.html'));
-});
-
-app.get('/quiz', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/html/quiz.html'));
-});
-
-app.get('/resultado', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/html/telaResultado.html'));
-});
 
 // Rotas da API
 var usuarioRouter = require("./src/routes/usuarios");
 var avisosRouter = require("./src/routes/avisos");
 var indexRouter = require("./src/routes/index");
+var quizRouter = require("./src/routes/quiz");
+const feedbackRouter = require("./src/routes/feedback");
 
-//app.use("/", indexRouter);
+
+
+app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
+app.use("/quiz", quizRouter);
+app.use("/feedback", feedbackRouter);
+
+
+
 
 
 app.listen(3000, () => {
-    console.log('Servidor rodando em http://localhost:3000');
+    console.log('Servidor rodando em http://localhost:3000/html/cadastro.html');
 });
 
 

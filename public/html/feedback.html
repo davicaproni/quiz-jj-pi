@@ -3,17 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/feedback.css">
     <title>FeedBack</title>
 </head>
+<header>
+    
+    <a class="voltar" href="index.html">← Voltar para a página anterior</a>
+
+</header>
 <body>
-    <h1>FeedBack</h1>
-    <h3>A página de Feedback é o espaço dedicado para você compartilhar sua opinião sobre nosso site. <br>Aqui, você pode avaliar sua experiência, atribuir uma nota e deixar um comentário detalhado, nos ajudando a melhorar cada vez mais. <br>Sua voz é essencial para aperfeiçoarmos nossos serviços e oferecer uma experiência ainda melhor!</h3>
-    Deixe aqui seu comentário: 
-    <input id="cometario">
-    <br>
+    <center>
+    <h1 class="titulo">FeedBack</h1>
+    <h5 class="frase">A página de Feedback é o espaço dedicado para você compartilhar sua opinião sobre nosso site. <br>Aqui, você pode avaliar sua experiência, atribuir uma nota e deixar um comentário detalhado, nos ajudando a melhorar cada vez mais. <br>Sua voz é essencial para aperfeiçoarmos nossos serviços e oferecer uma experiência ainda melhor!</h5>
+    
+    <div class="box"> 
+    Deixe aqui seu comentário<br>
+<textarea class="input1" name="comentario" id="comentario"  maxlength="250"></textarea> <br>
     <br>
     Qual nota você nos dá?
-    <input id="nota">
-
+    <input class="input2" type="number" id="nota" max="10" min="0">
+    <br><br>
+    <button class="button" onclick="enviar()">Enviar Feedback</button>
+    </div>
+</center>
 </body>
 </html>
+<script>
+    function enviar() {
+        if (comentario.value == '' && nota.value == '') {
+            alert('Preencha os campos corretamente')
+        } else if (comentario.value == '') {
+            alert('Insira um comentário')
+        }else 
+        if (nota.value == '') {
+            alert('Insira uma nota')
+        }else if (nota.value != Number(nota.value)){
+            alert('Insira um número')
+        }else if (Number(nota.value) < 0 || Number(nota.value) > 10 ){
+            alert('Insira um número MAIOR que 1 e MENOR que 10')
+        }else{
+            
+        fetch("/feedback/registrarComentario", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        fkCadastroFServer: sessionStorage.getItem('ID_USUARIO'),
+        comentarioServer: comentario.value,
+        notaServer: nota.value
+      }),
+    })
+
+    alert('FeedBack Enviado com sucesso!')
+    comentario.value = ''
+    nota.value = ''
+        }
+    }
+
+</script>
