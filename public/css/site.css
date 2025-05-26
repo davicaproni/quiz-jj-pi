@@ -3,7 +3,10 @@
 
 body{
     background: linear-gradient(to bottom, rgb(248, 244, 238), rgb(230, 225, 218), rgb(210, 205, 198), rgb(149, 145, 139));
+    padding-top: 60px; /* ou um pouco mais se tiver sombra */
+
 }
+
 
 .titulo{
     text-align: center;
@@ -228,20 +231,22 @@ body{
     text-align: justify;
 
   }
-/* NAV */
 nav {
     background-color: #000000;
     padding: 1%;
-    margin: -20px;
+    margin: 0;
+    width: 100%;
     height: 60px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 40px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* sombra leve */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
-/* LINKS */
 .nav-bar {
     color: white;
     text-decoration: none;
@@ -252,17 +257,51 @@ nav {
     padding: 8px 12px;
     border-radius: 4px;
     transition: all 0.3s ease;
-    position: relative;
 }
 
-/* EFEITO HOVER */
 .nav-bar:hover {
     color: rgb(162, 209, 247);
     background-color: rgba(255, 255, 255, 0.05);
     transform: scale(1.05);
 }
 
+.nav-bar2 {
+    color: white;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    text-decoration: none;
+}
 
+.nav-container {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-bar3 {
+    color: white;
+    text-decoration: none;
+    font-family: "Inter", sans-serif;
+    margin-left: -30%;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 20px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-bar3:hover {
+    color: rgb(162, 209, 247);
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: scale(1.05);
+}
 
 html{
     scroll-behavior: smooth;

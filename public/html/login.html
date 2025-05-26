@@ -18,6 +18,7 @@
    <button onclick="entrar()" class="button">LOGIN</button>
    <br><br>
    <button onclick="cadastrar()" class="button2">Fazer Cadastro</button>
+   <br>
            <!-- Loading div (adicionando div_aguardar) -->
         <div id="div_aguardar" style="display:none;">
             <p>Carregando...</p>
@@ -39,6 +40,7 @@
 function entrar() {
 
     function aguardar() {
+    mensagem_erro.innerHTML =""
     var divAguardar = document.getElementById("div_aguardar");
     divAguardar.style.display = "flex";
 }
@@ -60,7 +62,7 @@ function finalizarAguardar(texto) {
 
         if (emailVar == "" || senhaVar == "") {
             cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            mensagem_erro.innerHTML = "Preencha todos os campos corretamente";
             finalizarAguardar();
             return false;
         }
@@ -137,7 +139,7 @@ function finalizarAguardar(texto) {
     
 
     function cadastrar() {
-    window.location.href = "/cadastro";
+    window.location = "../html/cadastro.html";
 }
 
 </script>

@@ -29,6 +29,7 @@ var avisosRouter = require("./src/routes/avisos");
 var indexRouter = require("./src/routes/index");
 var quizRouter = require("./src/routes/quiz");
 const feedbackRouter = require("./src/routes/feedback");
+var desempenhoRouter = require("./src/routes/desempenho");
 
 
 
@@ -37,6 +38,8 @@ app.use("/usuarios", usuarioRouter);
 app.use("/avisos", avisosRouter);
 app.use("/quiz", quizRouter);
 app.use("/feedback", feedbackRouter);
+app.use("/desempenho", desempenhoRouter);
+
 
 
 
