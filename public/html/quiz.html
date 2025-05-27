@@ -18,14 +18,12 @@
  <h1>Quiz Jiu-Jitsu</h1>
  <h3>Teste os seus conhecimentos</h3>
  <div class="line2"></div>
-<button onclick="desempenhos()">Ver Desempenhos anteriores</button>
-<canvas id="myChart">myChart</canvas>
-    <div id="btnAquario"></div>
-    <div id="graficos"></div>
 
-<body onload="onloadEsconder()">
-    <div id="pontuacaoEJogo">
+
+<body  onload="onloadEsconder()">
         <button class="btnIniciar" id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+        
+
 
         <div id="pontuacao" class="flex-colunar width-fit-content">
             <div id="pontuacaoDuranteJogo" class="padding-8">
@@ -100,7 +98,13 @@
             </div>
 
     </div>
+<button class="btnIniciar" onclick="desempenhos()">Ver Desempenhos anteriores</button>
+
+<canvas id="myChart"></canvas>
+    <div id="btnAquario"></div>
+    <div id="graficos"></div>
 </body>
+
 
 </html>
 <script>
@@ -218,7 +222,7 @@
     function onloadEsconder() {
         document.getElementById('pontuacao').style.display = "none"
         document.getElementById('jogo').style.display = "none"
-                document.getElementById('graficoB').style.display = "none"
+        document.getElementById('graficoB').style.display = "none"
 
 
     }
@@ -369,10 +373,10 @@
         let textoParaMensagemFinal = null
         let classComCoresParaMensagemFinal = null
         const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
-        for (index = 1; index <= listaQuestoes.length -1; index++) {
+        
             txt.innerHTML = `Questões em que você errou: ${listaQuestoes}`
             
-        }
+        
         if (porcentagemFinalDeAcertos <= 0.3) {
             textoParaMensagemFinal = "Parece que você não estudou..."
             classComCoresParaMensagemFinal = "text-danger-with-bg"
@@ -402,28 +406,42 @@
 
         document.getElementById('graficoB').style.display = 'block';
 
-new Chart(document.getElementById('graficoB').getContext('2d'), {
-    type: 'line',
-    data: {
-        labels: pontuacaoAcumulada.map((_, i) => `Pergunta ${i + 1}`),
-        datasets: [{
-            label: 'Pontuação acumulada',
-            data: pontuacaoAcumulada,
-            borderColor: 'blue',
-            backgroundColor: 'transparent',
-            fill: false,
-            tension: 0.1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true,
-                suggestedMax: quantidadeDeQuestoes
+        var pont = [];
+        for (let i = 1; i <= pontuacaoAcumulada.length; i++) {
+        pont.push(i);
+}
+        new Chart(document.getElementById('graficoB').getContext('2d'), {
+            type: 'line',
+            data: {
+                labels: pont,
+                datasets: [{
+                    label: 'Pontuação acumulada',
+                    data: pontuacaoAcumulada,
+                    borderColor: 'blue',
+                    backgroundColor: 'transparent',
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                    title: {
+                            display: true,
+                            text: 'Perguntas'
+                        }    
+                    },
+                    y: {
+                        beginAtZero: true,
+                        suggestedMax: quantidadeDeQuestoes,
+                         title: {
+                            display: true,
+                            text: 'Pontuação'
+                        }
+                    }
+                }
             }
-        }
-    }
-});
+        });
 
 fetch("/quiz/registrarQuiz", {
     method: "POST",
@@ -448,42 +466,19 @@ fetch("/quiz/registrarQuiz", {
     }
 
  function desempenhos() {
-        var aquarios = JSON.parse(sessionStorage.ID_USUARIO);
-        aquarios.forEach(item => {
-            document.getElementById("btnAquario").innerHTML += `
-            <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
-            `
+        var fkCadastroP = JSON.parse(sessionStorage.ID_USUARIO);
+       
 
-            document.getElementById("graficos").innerHTML += `
-                <div id="grafico${item.id}" class="display-none">
-                    <h3 class="tituloGraficos">
-                        <span id="tituloAquario${item.id}">${item.descricao}</span>
-                    </h3>
-                    <div class="graph">
-                        <canvas id="myChartCanvas${item.id}"></canvas>
-                    </div>
-                    <div class="label-captura">
-                        <p id="avisoCaptura${item.id}" style="color: white"></p>
-                    </div>
-                </div>
-            `
+            obterDadosGrafico(fkCadastroP)
+        ;
 
-            obterDadosGrafico(item.id)
-        });
-
-        if (aquarios.length > 0) {
-            exibirAquario(aquarios[0].id)
-        }
+            exibirAquario(fkCadastroP)
+        
     }
 
-    function alterarTitulo(fkCadastroP) {
-        var tituloAquario = document.getElementById(`tituloAquario${fkCadastroP}`)
-        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == fkCadastroP).descricao;
-        tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
-    }
 
     function exibirAquario(fkCadastroP) {
-        let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
+        let todosOsGraficos = JSON.parse(sessionStorage.ID_USUARIO);
 
         for (i = 0; i < todosOsGraficos.length; i++) {
             // exibindo - ou não - o gráfico
@@ -527,13 +522,9 @@ fetch("/quiz/registrarQuiz", {
     //     Para ajustar o "select", ajuste o comando sql em src/models
     function obterDadosGrafico(fkCadastroP) {
 
-        alterarTitulo(fkCadastroP)
 
-        if (proximaAtualizacao != undefined) {
-            clearTimeout(proximaAtualizacao);
-        }
 
-        fetch(`/medidas/ultimas/${fkCadastroP}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/desempenho/ultimas/${fkCadastroP}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -565,20 +556,31 @@ fetch("/quiz/registrarQuiz", {
         let dados = {
             labels: labels,
             datasets: [{
-                label: 'Umidade',
+                label: 'Pontuação',
                 data: [],
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
-            },
-            {
-                label: 'Temperatura',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(199, 52, 52)',
-                tension: 0.1
-            }]
+            }]}
+            let opcoes = { 
+            scales: {
+                x: {
+                    title: {
+                            display: true,
+                            text: 'Datas'
+                        }
+                    },
+                y: {
+                    beginAtZero: true,
+                    suggestedMax: 10,
+                    title: {
+                            display: true,
+                            text: 'Pontuação'
+                        }
+                }
+            }
         };
+
 
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
@@ -588,8 +590,8 @@ fetch("/quiz/registrarQuiz", {
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             labels.push(registro.momento_grafico);
-            dados.datasets[0].data.push(registro.umidade);
-            dados.datasets[1].data.push(registro.temperatura);
+            dados.datasets[0].data.push(registro.pontos);
+            
         }
 
         console.log('----------------------------------------------')
@@ -604,15 +606,14 @@ fetch("/quiz/registrarQuiz", {
         const config = {
             type: 'line',
             data: dados,
+            options : opcoes
         };
 
         // Adicionando gráfico criado em div na tela
         let myChart = new Chart(
-            document.getElementById(`myChartCanvas${fkCadastroP}`),
-            config
-        );
-
-        setTimeout(() => atualizarGrafico(fkCadastroP, dados, myChart), 2000);
+    document.getElementById('myChart'),
+    config
+);
     }
 
 </script>

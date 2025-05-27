@@ -1,25 +1,25 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(fkCadastroP, limite_linhas) {
+function buscarUltimasMedidas(fkCadastroP) {
 
     var instrucaoSql = `SELECT 
                         pontos, 
-                        dtPonto,
-                        DATE_FORMAT(dtPonto,'%H:%i:%s') as momento_grafico
+                        DATE_FORMAT(dtPonto, '%d/%m/%Y %H:%i:%s') as momento_grafico
                     FROM pontuacao
                     WHERE fkCadastroP = ${fkCadastroP}
-                    ORDER BY id DESC LIMIT ${limite_linhas}`;
+                    ORDER BY dtPonto DESC `
+                    ;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idAquario) {
+function buscarMedidasEmTempoReal(fkCadastroP) {
 
     var instrucaoSql = `SELECT 
                         pontos, 
                         dtPonto,
-                        DATE_FORMAT(dtPonto,'%H:%i:%s') as momento_grafico
+                        idPontuacao as momento_grafico
                     FROM pontuacao
                     WHERE fkCadastroP = ${fkCadastroP}
                     ORDER BY id DESC LIMIT ${limite_linhas}`;
