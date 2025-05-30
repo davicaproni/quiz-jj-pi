@@ -19,10 +19,14 @@
 }
 
 body {
-    color: var(--new-black);
+    
     background-color: var(--new-white);
     font-family: "Inter", sans-serif;
     justify-items: center;
+    background: linear-gradient(to bottom, rgb(248, 244, 238), rgb(230, 225, 218), rgb(210, 205, 198), rgb(149, 145, 139));
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-attachment: fixed;
 }
 
 .btnIniciar{
@@ -38,7 +42,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 30px;
+    margin: 20px auto 30px;
     width: 100%;
     height: 100%;
     text-decoration: none;
@@ -109,8 +113,8 @@ button {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 800px;
-    min-width: 800px;
+    max-width: 600px;
+    min-width: 600px;
     min-height: 200px; /* força altura mínima */
     box-sizing: border-box; /* garante que padding não estique o container */
     margin: 0 auto;
@@ -126,8 +130,8 @@ button {
     flex-direction: column;
     align-items: center;
     width: 70%;
-    max-width: 600px;
-    min-width: 600px;
+    max-width: 400px;
+    min-width: 400px;
     min-height: 10px;
     margin: 10px auto;
     text-align: justify;
@@ -145,8 +149,39 @@ button {
     align-items: center;
     width: 70%;
     max-width: 200px;
-     min-width: 600px;
+     min-width: 400px;
     margin: 2px auto;
+}
+
+.padding-11 {
+    padding: 20px;
+    background: rgb(152, 170, 185);
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex; /* corrigido para flex, para usar flex-direction */
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 800px;
+    min-width: 400px;
+    min-height: 200px; /* força altura mínima */
+    box-sizing: border-box; /* garante que padding não estique o container */
+    margin: 0 auto;
+    
+}
+
+.padding-12{
+    padding: 15px;
+    background-color: #e8eff5; /* tom leve de azul */
+    border: 1px solid #d1d5db; /* borda leve */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 110%;
+    margin: 30px auto;
 }
 
 .text-bold {
