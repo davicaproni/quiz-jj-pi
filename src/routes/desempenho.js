@@ -11,4 +11,5 @@ router.get("/tempo-real/:fkCadastroP", function (req, res) {
     desempenhoController.buscarMedidasEmTempoReal(req, res);
 })
 
+
 module.exports = router;

@@ -123,6 +123,7 @@
             <h3>Divirta-se e teste agora os seus conhecimentos sobre a arte-suave <br> em um formulario interativo e super divertido!</h3>
             <div class="line1"></div>
     <button onclick="ir()" class="button">Ir para quiz</button>
+    <button onclick="irD()" class="button">Ver Seus Desempenhos no Quiz</button>
     </div>
     
     <br>
@@ -178,7 +179,24 @@ function ir() {
 
                     setTimeout(function () {
                         window.location.href = "../html/index.html";
-                    }, 1000); // apenas para exibir o loading
+                    }, 1000); 
+
+                });
+
+}
+function irD() {
+            window.location.href = "../html/desempenho.html";
+            resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idCadastro;
+                    
+
+                    setTimeout(function () {
+                        window.location.href = "../html/index.html";
+                    }, 1000); 
 
                 });
 

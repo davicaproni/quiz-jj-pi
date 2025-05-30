@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desempenho</title>
+    <link rel="stylesheet" href="../css/quiz.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+<header>
+    <a class="voltar" href="index.html">← Voltar para a página anterior</a>
+</header>
+
+ <h1>Seus resultados</h1>
+ <h3>Veja os resultados de suas últimas tentativas em nosso quiz!</h3>
+ <div class="line2"></div>
+
+ <body onload=
+     desempenhos()>
+
+    <b id="texto">Cada ponto representa uma tentativa distinta, permitindo visualizar a evolução do desempenho ao longo do tempo. </b>
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="mensagemSemTentativas" style="display: none; color: red; font-weight: bold; margin-top: 20px;">
+    Você ainda não fez nenhuma tentativa.
+    </div>
+
+    <div id="pontuacao" class="flex-colunar width-fit-content">
+            <div id="pontuacaoDuranteJogo" class="padding-8">
+                <div class="flexbox3">
+                <span class="caixaPontos">Tentativas: <br><br> <center><div id="tent"></div></center></span> 
+                <span class="caixaPontos">Pontuação Média: <br><br><center><div id="media"></div></center></span>
+                </div>
+    
+    <canvas id="myChart" class="padding-12"></canvas>
+    <div id="btnAquario"></div>
+    <div id="graficos"></div>
+
+</body>
+</html>
+<script>
+    var proximaAtualizacao;
+    var myChart;
+    var dados;
+    var opcoes;
+
+    function desempenhos() {
+    document.getElementById('myChart').style.display = "flex";
+
+            
+
+        var fkCadastroP = parseInt(sessionStorage.ID_USUARIO);
+            obterDadosGrafico(fkCadastroP)
+            exibirAquario(fkCadastroP)
+
+    }
+
+
+    function exibirAquario(fkCadastroP) {
+        let todosOsGraficos = JSON.parse(sessionStorage.ID_USUARIO);
+
+        for (i = 0; i < todosOsGraficos.length; i++) {
+            // exibindo - ou não - o gráfico
+            if (todosOsGraficos[i].id != fkCadastroP) {
+                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
+                if (elementoAtual.classList.contains("display-block")) {
+                    elementoAtual.classList.remove("display-block")
+                }
+                elementoAtual.classList.add("display-none")
+
+                // alterando estilo do botão
+                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
+                if (btnAtual.classList.contains("btn-pink")) {
+                    btnAtual.classList.remove("btn-pink")
+                }
+                btnAtual.classList.add("btn-white")
+            }
+        }
+
+        // exibindo - ou não - o gráfico
+        let graficoExibir = document.getElementById(`grafico${fkCadastroP}`)
+        graficoExibir.classList.remove("display-none")
+        graficoExibir.classList.add("display-block")
+
+        // alterando estilo do botão
+        let btnExibir = document.getElementById(`btnAquario${fkCadastroP}`)
+        btnExibir.classList.remove("btn-white")
+        btnExibir.classList.add("btn-pink")
+    }
+
+    // O gráfico é construído com três funções:
+    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+
+    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+    function obterDadosGrafico(fkCadastroP) {
+
+        
+        if (proximaAtualizacao != undefined) {
+            clearTimeout(proximaAtualizacao);
+        }
+
+        fetch(`/desempenho/tempo-real/${fkCadastroP}`, { cache: 'no-store' }).then(function (response) {
+
+            if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+
+                document.getElementById('myChart').style.display = "block";
+                document.getElementById('mensagemSemTentativas').style.display = "none";
+                
+
+                resposta.reverse();
+
+                plotarGrafico(resposta, fkCadastroP);   
+                
+            });
+        
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                document.getElementById('myChart').style.display = "block";
+                document.getElementById('mensagemSemTentativas').style.display = "block";
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                document.getElementById('myChart').style.display = "block";
+            document.getElementById('mensagemSemTentativas').style.display = "block";
+            });
+           
+    }
+    
+    // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+    // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+    // A função *plotarGrafico* também invoca a função *atualizarGrafico*
+    function plotarGrafico(resposta, fkCadastroP) {
+
+        setTimeout(() => atualizarGrafico(fkCadastroP, dados, myChart), 100);
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+         dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Pontuação',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]}
+            opcoes = { 
+                responsive: true,
+            scales: {
+                x: {
+                    title: {
+                            display: true,
+                            text: 'Datas'
+                        }
+                    },
+                y: {
+                    beginAtZero: true,
+                    suggestedMax: 10,
+                    title: {
+                            display: true,
+                            text: 'Pontuação'
+                        }
+                }
+            }
+        };
+
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.momento_grafico);
+            dados.datasets[0].data.push(registro.pontos);
+            
+        }
+
+        if (dados.datasets[0].data.length === 0) {
+    ;
+    labels.push("Sem tentativas");
+    dados.datasets[0].data.push(0);
+}
+    
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: dados,
+            options : opcoes
+        };
+
+        // Adicionando gráfico criado em div na tela
+        myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+);
+
+        setTimeout(() => atualizarGrafico(fkCadastroP, dados, myChart), 100);
+
+        buscarTentativas();
+        buscarMedia();
+    }
+
+    function atualizarGrafico(fkCadastroP, dados, myChart) {
+
+        fetch(`/desempenho/tempo-real/${fkCadastroP}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    obterdados(fkCadastroP);
+                    // alertar(novoRegistro, idAquario);
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+                    let avisoCaptura = document.getElementById(`avisoCaptura${fkCadastroP}`)
+                    avisoCaptura.innerHTML = ""
+
+
+                        // tirando e colocando valores no gráfico
+                        
+                        dados.labels.push(novoRegistro[0].momento_grafico); // incluir um novo momento
+
+                        
+                        dados.datasets[0].data.push(novoRegistro[0].pontos); // incluir uma nova medida de umidade
+
+                        
+
+                        myChart.update();
+                    
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(fkCadastroP, dados, myChart), 1000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(fkCadastroP, dados, myChart), 1000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        }
+
+
+    function buscarTentativas() {
+    if (!dados.datasets[0].data.length || (dados.datasets[0].data.length === 1 && dados.datasets[0].data[0] === 0)) {
+    tent.innerHTML = `Sem tentativas`
+    }
+    else{
+    tent.innerHTML = dados.datasets[0].data.length
+        }
+    }
+
+    function buscarMedia() {
+        if (!dados.datasets[0].data.length || (dados.datasets[0].data.length === 1 && dados.datasets[0].data[0] === 0)) {
+            media.innerHTML = `Sem tentativas`
+        }else{
+        const pontos = dados.datasets[0].data;
+        var soma = 0;
+        for (i = 0; i < pontos.length; i++) {
+        soma += pontos[i];
+        }
+        const média = (soma / pontos.length).toFixed(1);
+        media.innerHTML = média;
+        }
+    
+    }
+            
+</script>
