@@ -1,17 +1,23 @@
-🥋 Quiz Jiu-Jitsu - Projeto Integrador (1º Semestre)
-Este é um projeto pessoal desenvolvido como parte do Projeto Integrador (P.I) do 1º semestre. Trata-se de um quiz interativo sobre Jiu-Jitsu, com perguntas para testar seus conhecimentos sobre a arte suave.
+# quiz-jj-pi
 
-🧠 Sobre o Projeto
-O objetivo principal deste projeto é aplicar conhecimentos de programação e desenvolvimento web por meio da criação de um site dinâmico e educativo.
+Projeto pessoal de P.I - 1º semestre
 
-🚀 Tecnologias Utilizadas
-HTML
-CSS
-JavaScript
+## Sobre
 
-📌 Funcionalidades
-Cadastro e login de usuários
+Este é um site sobre Jiu-Jitsu. O objetivo é testar os conhecimentos dos usuários sobre o esporte, usando uma aplicação web simples.
 
-Sistema de perguntas e respostas
+## Tecnologias usadas
 
-Pontuação ao final do quiz
+- HTML  
+- CSS  
+- JavaScript
+
+## Funcionalidades
+
+- Cadastro e login de usuário  
+- Quiz com perguntas de múltipla escolha  
+- Sistema de pontuação  
+- Exibição do resultado final
+
+
+
